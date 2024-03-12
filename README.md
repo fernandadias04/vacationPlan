@@ -32,6 +32,8 @@ Exemplo:
 
 Ao retornar, adicione o token nos headers. 
 
+Exemplo:
+
 Authorization: Bearer 2|qM3Cr4zj1k2gJgcFYc5Gtl31qONM0xM4KjC2s8NTa149baf0
 
 Para simular as rotas eu utilizei o Insominia, mas você poderá utilizar a ferramenta de sua preferência. 
