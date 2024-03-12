@@ -1,40 +1,66 @@
+#Instalação
+
 Primeiro, clone o projeto do git para a sua maquina. 
+
+Logo após, inicialize o composer e suas dependencias 
+
+``
+docker run --rm \
+    -u "$(id -u):$(id -g)" \
+    -v "$(pwd):/var/www/html" \
+    -w /var/www/html \
+    laravelsail/php83-composer:latest \
+    composer install --ignore-platform-reqs
+`
+
+#Configuração
 
 Copie o arquivo .env.example para um novo arquivo chamado .env:
 
+``
 cp .env.example .env
+``
 
+#Execução
 
 Nesse projeto, utilizamos o sail como operador do Dcoker. 
 
 Por isso para subir o projeto é necessário usar o comando: 
 
-
-"./vendor/bin/sail up -d"
-
+``
+./vendor/bin/sail up -d
+``
 
 Logo após, as migrations: 
 
-"./vendor/bin/sail artisan migrate"
+``
+./vendor/bin/sail artisan migrate
+``
 
 E então, para facilitar rode a seed do projeto. É com esse usuário que você consiguirar o token para validar as rotas da api: 
 
-"./vendor/bin/sail artisan db:seed"
+``
+./vendor/bin/sail artisan db:seed
+``
 
 Todas as rotas internas precisam de um Authorization. Para conseguir é necessário usar a rota "/login" passando o usuário, senha e device_name. 
 Exemplo: 
 
+``
 {
 	"email": "test@example.com",
 	"password" : "123456987",
 	"device_name" : "Insominia"
 }
+``
 
 Ao retornar, adicione o token nos headers. 
 
 Exemplo:
 
+``
 Authorization: Bearer 2|qM3Cr4zj1k2gJgcFYc5Gtl31qONM0xM4KjC2s8NTa149baf0
+``
 
 Para simular as rotas eu utilizei o Insominia, mas você poderá utilizar a ferramenta de sua preferência. 
 
