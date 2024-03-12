@@ -11,7 +11,7 @@ docker run --rm \
     -w /var/www/html \
     laravelsail/php83-composer:latest \
     composer install --ignore-platform-reqs
-`
+``
 
 #Configuração
 
