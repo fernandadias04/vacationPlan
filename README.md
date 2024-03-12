@@ -6,7 +6,6 @@ First, clone the project from git to your machine.
 Afterwards, initialize Composer and its dependencies
 
 ``
-
 docker run --rm \
     -u "$(id -u):$(id -g)" \
     -v "$(pwd):/var/www/html" \
@@ -20,7 +19,6 @@ Configuration
 Copy the .env.example file to a new file named .env:
 
 ``
-
 cp .env.example .env
 `` 
 
@@ -31,7 +29,6 @@ In this project, we use Sail as a Docker operator.
 Therefore, to bring up the project, you need to use the command:
 
 ``
-
 ./vendor/bin/sail up -d
 `` 
 
@@ -56,7 +53,7 @@ All internal routes require an Authorization. To get it, you need to use the "/l
   "password": "123456987",
   "device_name": "Insomnia"
 }
-`
+``
 
 When returning, add the token to the headers.
 
