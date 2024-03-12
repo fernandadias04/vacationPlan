@@ -1,3 +1,91 @@
+
+Installation
+
+First, clone the project from git to your machine.
+
+Afterwards, initialize Composer and its dependencies
+
+``
+
+docker run --rm \
+    -u "$(id -u):$(id -g)" \
+    -v "$(pwd):/var/www/html" \
+    -w /var/www/html \
+    laravelsail/php83-composer:latest \
+    composer install --ignore-platform-reqs
+``
+
+Configuration
+
+Copy the .env.example file to a new file named .env:
+
+``
+
+cp .env.example .env
+`` 
+
+Execution
+
+In this project, we use Sail as a Docker operator.
+
+Therefore, to bring up the project, you need to use the command:
+
+``
+
+./vendor/bin/sail up -d
+`` 
+
+Afterwards, run the migrations:
+
+
+``
+./vendor/bin/sail artisan migrate
+``
+
+And then, to make it easier, run the project seed. It is with this user that you will get the token to validate the api routes:
+
+``
+./vendor/bin/sail artisan db:seed
+`
+
+All internal routes require an Authorization. To get it, you need to use the "/login" route passing the user, password and device_name. Example:
+
+``
+{
+  "email": "test@example.com",
+  "password": "123456987",
+  "device_name": "Insomnia"
+}
+`
+
+When returning, add the token to the headers.
+
+Example:
+``
+Authorization: Bearer 2|qM3Cr4zj1k2gJgcFYc5Gtl31qONM0xM4KjC2s8NTa149baf0
+``
+
+To simulate the routes I used Insomnia, but you can use the tool of your choice.
+
+The routes used and their parameters are:
+
+/login -> POST method. It expects to receive an email, password and device_name. Returns the authentication token.
+
+/get/all -> GET method. Returns all registered vacation plans.
+
+/create -> POST method. Creates a vacation plan. It expects to receive the following values: 'title', 'description', 'date' (in format YYYY/MM/DD), 'location', 'participants' (optional), in JSON request body.
+
+/get-vacation/{id} -> GET method. Returns the vacation plan corresponding to the ID passed in the URL.
+
+/update/{id} -> PATCH method. Updates the fields of the event using the ID as identifier. It can be one or all. It expects to receive one of the following values: 'title', 'description', 'date' (in format YYYY/MM/DD), 'location', 'participants' (optional), in JSON request body.
+
+/delete/{id} -> DELETE method. Deletes the event from the database using the ID as identifier.
+
+/get-pdf/{id} -> GET method. Downloads a PDF to the storage folder of the project passing the ID as event identifier.
+
+
+
+
 #Instalação
 
 Primeiro, clone o projeto do git para a sua maquina. 
